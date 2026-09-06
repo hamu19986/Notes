@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Complete Web Dev Notebook — HTML · CSS · JS, Zero to God Mode</title>
+<meta name="description" content="A handwritten-style master cheat sheet for HTML, CSS and JavaScript — from absolute beginner to God Mode.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ SKIP LINK ============ -->
+<a href="#main" class="skip-link">Skip to notes</a>
+
+<!-- ============ PROGRESS BAR ============ -->
+<div class="progress-rail" aria-hidden="true"><div id="progressBar" class="progress-fill"></div></div>
+
+<!-- ============ TOP NAV ============ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <button id="drawerToggle" class="icon-btn drawer-toggle" aria-label="Open table of contents" aria-expanded="false">
+      <span class="burger"></span>
+    </button>
+    <a href="#top" class="brand">
+      <span class="brand-mark">✎</span>
+      <span class="brand-text">The Web Dev Notebook</span>
+    </a>
+
+    <div class="search-wrap">
+      <input id="searchInput" type="search" class="search-input" placeholder="Search notes… try 'flex' or 'closure'" autocomplete="off" aria-label="Search the notebook">
+      <div id="searchResults" class="search-results" hidden></div>
+    </div>
+
+    <nav class="quick-nav" aria-label="Main sections">
+      <a href="#html-section" data-section="html-section">HTML</a>
+      <a href="#css-section" data-section="css-section">CSS</a>
+      <a href="#js-section" data-section="js-section">JS</a>
+      <a href="#quickref-section" data-section="quickref-section">Quick Ref</a>
+      <a href="#exam-section" data-section="exam-section">Exam Mode</a>
+      <a href="#practice-section" data-section="practice-section">Practice</a>
+    </nav>
+
+    <button id="themeToggle" class="icon-btn theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <span id="themeIcon">🌙</span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ SIDEBAR / DRAWER TOC ============ -->
+<nav id="sideDrawer" class="side-drawer" aria-label="Table of contents">
+  <div class="drawer-head">
+    <span class="drawer-title">Table of Contents</span>
+    <button id="drawerClose" class="icon-btn" aria-label="Close table of contents">✕</button>
+  </div>
+  <ol class="toc-list" id="tocList">
+    <!-- populated by script.js, also has static fallback below -->
+    <li><a href="#html-section">1. HTML</a>
+      <ol>
+        <li><a href="#html-l1">Absolute Beginner</a></li>
+        <li><a href="#html-l2">Essential Elements</a></li>
+        <li><a href="#html-l3">Lists &amp; Structure</a></li>
+        <li><a href="#html-l4">Tables</a></li>
+        <li><a href="#html-l5">Forms</a></li>
+        <li><a href="#html-l6">Semantic HTML</a></li>
+        <li><a href="#html-l7">HTML5 &amp; Advanced</a></li>
+      </ol>
+    </li>
+    <li><a href="#css-section">2. CSS</a>
+      <ol>
+        <li><a href="#css-l1">Fundamentals</a></li>
+        <li><a href="#css-l2">Selectors</a></li>
+        <li><a href="#css-l3">Cascade &amp; Specificity</a></li>
+        <li><a href="#css-l4">Box Model</a></li>
+        <li><a href="#css-l5">Colors, Text &amp; Fonts</a></li>
+        <li><a href="#css-l6">Display &amp; Positioning</a></li>
+        <li><a href="#css-l7">Flexbox</a></li>
+        <li><a href="#css-l8">CSS Grid</a></li>
+        <li><a href="#css-l9">Responsive Design</a></li>
+        <li><a href="#css-l10">Advanced CSS</a></li>
+      </ol>
+    </li>
+    <li><a href="#js-section">3. JavaScript</a>
+      <ol>
+        <li><a href="#js-l1">Fundamentals</a></li>
+        <li><a href="#js-l2">Data Types</a></li>
+        <li><a href="#js-l3">Operators</a></li>
+        <li><a href="#js-l4">Conditions</a></li>
+        <li><a href="#js-l5">Loops</a></li>
+        <li><a href="#js-l6">Functions</a></li>
+        <li><a href="#js-l7">Arrays</a></li>
+        <li><a href="#js-l8">Objects</a></li>
+        <li><a href="#js-l9">DOM</a></li>
+        <li><a href="#js-l10">Events</a></li>
+        <li><a href="#js-async">Asynchronous JS</a></li>
+        <li><a href="#js-advanced">Advanced JS</a></li>
+        <li><a href="#js-builtins">Built-ins</a></li>
+        <li><a href="#js-webapis">Web APIs</a></li>
+      </ol>
+    </li>
+    <li><a href="#integration-section">4. Mini Projects</a></li>
+    <li><a href="#quickref-section">5. God-Mode Quick Reference</a></li>
+    <li><a href="#mistakes-section">6. Don't Make These Mistakes</a></li>
+    <li><a href="#exam-section">7. Exam Mode</a></li>
+    <li><a href="#practice-section">8. Practice / Playground</a></li>
+  </ol>
+</nav>
+<div id="drawerOverlay" class="drawer-overlay" hidden></div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section id="top" class="hero">
+  <div class="hero-paperclip" aria-hidden="true">📎</div>
+  <h1 class="hero-title">HTML <span class="ink-dash">·</span> CSS <span class="ink-dash">·</span> JavaScript</h1>
+  <p class="hero-sub">one notebook, zero to <span class="highlight">GOD MODE</span></p>
+  <p class="hero-note">If you lost every other note tomorrow — keep this one. Scroll, search, or jump straight to <a href="#exam-section">Exam Mode</a>.</p>
+  <div class="hero-stats">
+    <div class="stat-card"><span class="stat-num">3</span><span class="stat-label">languages</span></div>
+    <div class="stat-card"><span class="stat-num">27</span><span class="stat-label">levels</span></div>
+    <div class="stat-card"><span class="stat-num">0</span><span class="stat-label">dependencies</span></div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- ================= 1. HTML SECTION ==================== -->
+<!-- ======================================================= -->
+<section id="html-section" class="subject" data-subject="HTML">
+  <div class="subject-tab subject-tab--html">HTML</div>
+  <h2 class="subject-title">Part 1 — HTML <span class="subject-sub">structure &amp; content</span></h2>
+
+  <article id="html-l1" class="level-block searchable" data-tags="html doctype head body structure headings paragraphs comments">
+    <h3 class="level-heading"><span class="level-num">Lvl 1</span> Absolute Beginner</h3>
+
+    <div class="concept-card">
+      <p class="what"><strong>WHAT?</strong> HTML (HyperText Markup Language) is the skeleton of every web page — it describes content, not looks.</p>
+      <p class="why"><strong>WHY?</strong> Browsers can only render a page if the content is wrapped in tags they understand.</p>
+      <div class="syntax-block">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- visible content goes here --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+      <p class="remember">📌 <strong>REMEMBER:</strong> <code>&lt;!DOCTYPE html&gt;</code> must be the very first line — it tells the browser "render in modern standards mode."</p>
+      <p class="trap">⚠️ <strong>COMMON TRAP:</strong> Forgetting <code>&lt;head&gt;</code> vs <code>&lt;body&gt;</code> — <em>nothing</em> inside <code>&lt;head&gt;</code> is visible on the page.</p>
+    </div>
+
+    <table class="ref-table">
+      <caption>Core structure tags</caption>
+      <thead><tr><th>Tag</th><th>Purpose</th><th>Example</th><th>Common mistake</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;html&gt;</code></td><td>Root of the document</td><td><code>&lt;html lang="en"&gt;…&lt;/html&gt;</code></td><td>Forgetting <code>lang</code> (hurts accessibility &amp; SEO)</td></tr>
+        <tr><td><code>&lt;head&gt;</code></td><td>Metadata, title, links to CSS/JS</td><td><code>&lt;head&gt;&lt;title&gt;Home&lt;/title&gt;&lt;/head&gt;</code></td><td>Putting visible text inside it</td></tr>
+        <tr><td><code>&lt;body&gt;</code></td><td>Everything the user sees</td><td><code>&lt;body&gt;&lt;h1&gt;Hi&lt;/h1&gt;&lt;/body&gt;</code></td><td>Only one <code>&lt;body&gt;</code> per page</td></tr>
+        <tr><td><code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code></td><td>Headings, biggest to smallest</td><td><code>&lt;h1&gt;Title&lt;/h1&gt;</code></td><td>Skipping levels (h1 → h4) breaks accessibility</td></tr>
+        <tr><td><code>&lt;p&gt;</code></td><td>Paragraph of text</td><td><code>&lt;p&gt;Hello world&lt;/p&gt;</code></td><td>Using <code>&lt;br&gt;&lt;br&gt;</code> to fake paragraph spacing</td></tr>
+        <tr><td><code>&lt;br&gt;</code></td><td>Single line break</td><td><code>Line1&lt;br&gt;Line2</code></td><td>Self-closing — no <code>&lt;/br&gt;</code></td></tr>
+        <tr><td><code>&lt;hr&gt;</code></td><td>Thematic horizontal rule</td><td><code>&lt;hr&gt;</code></td><td>Using it just for a visual line (that's CSS's job)</td></tr>
+        <tr><td><code>&lt;!-- --&gt;</code></td><td>Comment, invisible to users</td><td><code>&lt;!-- TODO: fix --&gt;</code></td><td>Leaving secrets/keys inside comments — anyone can view-source</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="html-l2" class="level-block searchable" data-tags="anchor link image audio video iframe strong em bold italic mark small sub sup">
+    <h3 class="level-heading"><span class="level-num">Lvl 2</span> Essential Elements</h3>
+    <table class="ref-table">
+      <thead><tr><th>Element</th><th>Purpose</th><th>Syntax → Example</th><th>Common mistake</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;a&gt;</code></td><td>Hyperlink</td><td><code>&lt;a href="page.html"&gt;Go&lt;/a&gt;</code></td><td>Forgetting <code>target="_blank"</code> needs <code>rel="noopener"</code></td></tr>
+        <tr><td><code>&lt;img&gt;</code></td><td>Embed an image</td><td><code>&lt;img src="cat.jpg" alt="A cat"&gt;</code></td><td>Missing <code>alt</code> — breaks accessibility &amp; SEO</td></tr>
+        <tr><td><code>&lt;audio&gt;</code></td><td>Embed sound</td><td><code>&lt;audio src="a.mp3" controls&gt;&lt;/audio&gt;</code></td><td>Forgetting <code>controls</code> (silent, no UI)</td></tr>
+        <tr><td><code>&lt;video&gt;</code></td><td>Embed video</td><td><code>&lt;video src="v.mp4" controls&gt;&lt;/video&gt;</code></td><td>Autoplay with sound annoys users / gets blocked</td></tr>
+        <tr><td><code>&lt;iframe&gt;</code></td><td>Embed another page/site</td><td><code>&lt;iframe src="https://x.com"&gt;&lt;/iframe&gt;</code></td><td>No <code>title</code> attribute (a11y issue)</td></tr>
+        <tr><td><code>&lt;strong&gt;</code></td><td>Strong <em>importance</em> (bold + semantic)</td><td><code>&lt;strong&gt;Warning&lt;/strong&gt;</code></td><td>Using <code>&lt;b&gt;</code> when you mean semantic importance</td></tr>
+        <tr><td><code>&lt;em&gt;</code></td><td>Emphasis (italic + semantic)</td><td><code>&lt;em&gt;really&lt;/em&gt;</code></td><td>Confusing with <code>&lt;i&gt;</code> (purely visual)</td></tr>
+        <tr><td><code>&lt;b&gt;</code> / <code>&lt;i&gt;</code></td><td>Visual bold/italic, no semantic weight</td><td><code>&lt;b&gt;Note&lt;/b&gt;</code></td><td>Overusing instead of CSS <code>font-weight</code></td></tr>
+        <tr><td><code>&lt;u&gt;</code></td><td>Underline text</td><td><code>&lt;u&gt;text&lt;/u&gt;</code></td><td>Looks like a link — confuses users</td></tr>
+        <tr><td><code>&lt;mark&gt;</code></td><td>Highlight relevant text</td><td><code>&lt;mark&gt;key term&lt;/mark&gt;</code></td><td>Using it for decoration, not relevance</td></tr>
+        <tr><td><code>&lt;small&gt;</code></td><td>Fine print / side comments</td><td><code>&lt;small&gt;© 2026&lt;/small&gt;</code></td><td>Using for general "smaller text" styling</td></tr>
+        <tr><td><code>&lt;sub&gt;</code> / <code>&lt;sup&gt;</code></td><td>Subscript / superscript</td><td><code>H&lt;sub&gt;2&lt;/sub&gt;O</code></td><td>Using for styling instead of chemistry/math meaning</td></tr>
+      </tbody>
+    </table>
+    <div class="margin-note">🖇 margin note: <code>alt=""</code> (empty) on a purely decorative image is <em>correct</em> — it tells screen readers to skip it.</div>
+  </article>
+
+  <article id="html-l3" class="level-block searchable" data-tags="ordered list unordered list description list nested div span semantic">
+    <h3 class="level-heading"><span class="level-num">Lvl 3</span> Lists &amp; Structure</h3>
+    <div class="two-col">
+      <div class="syntax-block">
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+  &lt;li&gt;Eggs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Wake up&lt;/li&gt;
+  &lt;li&gt;Code&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Structure language&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+      </div>
+      <p class="remember">📌 <strong>REMEMBER:</strong> <code>&lt;ul&gt;</code> = unordered (bullets), <code>&lt;ol&gt;</code> = ordered (numbers), <code>&lt;dl&gt;</code> = term/definition pairs.</p>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Tag</th><th>Purpose</th><th>Common mistake</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;div&gt;</code></td><td>Generic block container, no meaning</td><td>"Divitis" — wrapping everything in divs instead of semantic tags</td></tr>
+        <tr><td><code>&lt;span&gt;</code></td><td>Generic inline container, no meaning</td><td>Using it where <code>&lt;strong&gt;</code>/<code>&lt;em&gt;</code> would be more meaningful</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="html-l4" class="level-block searchable" data-tags="table tr th td thead tbody tfoot colspan rowspan">
+    <h3 class="level-heading"><span class="level-num">Lvl 4</span> Tables</h3>
+    <div class="syntax-block">
+<pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Score&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Asha&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan="2"&gt;Bonus round&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+    </div>
+    <p class="remember">📌 <strong>REMEMBER:</strong> <code>colspan</code> merges columns sideways, <code>rowspan</code> merges rows downward.</p>
+    <p class="trap">⚠️ <strong>TRAP:</strong> Using tables for page layout — that's what Flexbox/Grid are for. Tables are for tabular <em>data</em> only.</p>
+  </article>
+
+  <article id="html-l5" class="level-block searchable" data-tags="form input label textarea select option fieldset legend required placeholder">
+    <h3 class="level-heading"><span class="level-num">Lvl 5</span> Forms</h3>
+    <div class="syntax-block">
+<pre><code>&lt;form action="/submit" method="POST"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" name="email" type="email" required placeholder="you@mail.com"&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;Plan&lt;/legend&gt;
+    &lt;input type="radio" name="plan" id="free" value="free" checked&gt;
+    &lt;label for="free"&gt;Free&lt;/label&gt;
+  &lt;/fieldset&gt;
+
+  &lt;select name="country"&gt;
+    &lt;option value="in" selected&gt;India&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;textarea name="bio" rows="3"&gt;&lt;/textarea&gt;
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+    </div>
+    <table class="ref-table">
+      <caption><code>&lt;input type="…"&gt;</code> variants</caption>
+      <thead><tr><th>type</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td>text</td><td>Free single-line text</td></tr>
+        <tr><td>password</td><td>Masks characters</td></tr>
+        <tr><td>email</td><td>Validates email shape</td></tr>
+        <tr><td>number</td><td>Numeric spinner, supports <code>min</code>/<code>max</code></td></tr>
+        <tr><td>radio</td><td>One choice from a group (same <code>name</code>)</td></tr>
+        <tr><td>checkbox</td><td>Independent on/off</td></tr>
+        <tr><td>date</td><td>Native date picker</td></tr>
+        <tr><td>file</td><td>Upload a file</td></tr>
+        <tr><td>submit / reset / button</td><td>Send form / clear form / do-nothing button</td></tr>
+      </tbody>
+    </table>
+    <table class="ref-table">
+      <caption>Key attributes</caption>
+      <thead><tr><th>Attribute</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>name</code></td><td>Key sent to the server</td></tr>
+        <tr><td><code>value</code></td><td>Current/default value</td></tr>
+        <tr><td><code>placeholder</code></td><td>Ghost hint text, not a label replacement</td></tr>
+        <tr><td><code>required</code></td><td>Blocks submit until filled</td></tr>
+        <tr><td><code>disabled</code></td><td>Not editable, not sent</td></tr>
+        <tr><td><code>readonly</code></td><td>Not editable, but still sent</td></tr>
+        <tr><td><code>checked</code> / <code>selected</code></td><td>Pre-selects a radio/checkbox/option</td></tr>
+        <tr><td><code>min</code> / <code>max</code> / <code>pattern</code></td><td>Constrains numbers, dates, or text shape (regex)</td></tr>
+      </tbody>
+    </table>
+    <p class="trap">⚠️ <strong>TRAP:</strong> <code>placeholder</code> is <em>not</em> a label. Screen readers need a real <code>&lt;label for="id"&gt;</code>.</p>
+  </article>
+
+  <article id="html-l6" class="level-block searchable" data-tags="semantic header nav main section article aside footer figure figcaption">
+    <h3 class="level-heading"><span class="level-num">Lvl 6</span> Semantic HTML</h3>
+    <p class="why"><strong>WHY IT MATTERS:</strong> semantic tags tell browsers, screen readers, and search engines <em>what</em> content means — not just how it looks.</p>
+    <div class="semantic-diagram" aria-hidden="true">
+      <div class="sd-row sd-header">header</div>
+      <div class="sd-row sd-nav">nav</div>
+      <div class="sd-row sd-main">
+        main
+        <div class="sd-col">
+          <div class="sd-article">article</div>
+          <div class="sd-aside">aside</div>
+        </div>
+      </div>
+      <div class="sd-row sd-footer">footer</div>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Tag</th><th>Means</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;header&gt;</code></td><td>Intro/branding for a page or section</td></tr>
+        <tr><td><code>&lt;nav&gt;</code></td><td>Group of navigation links</td></tr>
+        <tr><td><code>&lt;main&gt;</code></td><td>The one primary content area (only once per page)</td></tr>
+        <tr><td><code>&lt;section&gt;</code></td><td>Thematic grouping, usually with a heading</td></tr>
+        <tr><td><code>&lt;article&gt;</code></td><td>Self-contained, independently distributable content</td></tr>
+        <tr><td><code>&lt;aside&gt;</code></td><td>Tangential content (sidebars, pull-quotes)</td></tr>
+        <tr><td><code>&lt;footer&gt;</code></td><td>Closing info for a page/section</td></tr>
+        <tr><td><code>&lt;figure&gt;</code>/<code>&lt;figcaption&gt;</code></td><td>Media with a caption, referenceable</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="html-l7" class="level-block searchable" data-tags="meta seo accessibility aria data attribute contenteditable hidden draggable dialog details summary">
+    <h3 class="level-heading"><span class="level-num">Lvl 7</span> HTML5 &amp; Advanced</h3>
+    <table class="ref-table">
+      <thead><tr><th>Feature</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;meta name="viewport"&gt;</code></td><td>Controls mobile scaling — required for responsive sites</td></tr>
+        <tr><td><code>&lt;meta name="description"&gt;</code></td><td>Text shown in search-engine results (SEO)</td></tr>
+        <tr><td><code>aria-*</code></td><td>Extra accessibility info for assistive tech, e.g. <code>aria-label</code></td></tr>
+        <tr><td><code>data-*</code></td><td>Custom data attribute, read via JS <code>element.dataset.x</code></td></tr>
+        <tr><td><code>contenteditable</code></td><td>Makes any element directly editable by the user</td></tr>
+        <tr><td><code>hidden</code></td><td>Removes an element from layout &amp; a11y tree</td></tr>
+        <tr><td><code>draggable</code></td><td>Enables native drag-and-drop</td></tr>
+        <tr><td><code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code></td><td>Native, JS-free collapsible disclosure widget</td></tr>
+        <tr><td><code>&lt;dialog&gt;</code></td><td>Native modal/popup element with <code>.showModal()</code></td></tr>
+      </tbody>
+    </table>
+    <div class="syntax-block">
+<pre><code>&lt;details&gt;
+  &lt;summary&gt;Click to expand&lt;/summary&gt;
+  &lt;p&gt;Hidden content revealed on click — zero JavaScript.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+    </div>
+  </article>
+</section>
+
+<!-- ======================================================= -->
+<!-- ================= 2. CSS SECTION ===================== -->
+<!-- ======================================================= -->
+<section id="css-section" class="subject" data-subject="CSS">
+  <div class="subject-tab subject-tab--css">CSS</div>
+  <h2 class="subject-title">Part 2 — CSS <span class="subject-sub">style &amp; layout</span></h2>
+
+  <article id="css-l1" class="level-block searchable" data-tags="css fundamentals inline internal external selector property value">
+    <h3 class="level-heading"><span class="level-num">Lvl 1</span> Fundamentals</h3>
+    <div class="syntax-block">
+<pre><code>selector {
+  property: value;
+}
+
+/* Example */
+p {
+  color: navy;
+  font-size: 16px;
+}</code></pre>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Method</th><th>Where it lives</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td>Inline</td><td><code>style="color:red"</code> on the tag</td><td>Highest (avoid — hard to maintain)</td></tr>
+        <tr><td>Internal</td><td><code>&lt;style&gt;</code> in <code>&lt;head&gt;</code></td><td>Medium</td></tr>
+        <tr><td>External</td><td>Separate <code>.css</code> file, linked</td><td>Best practice — cacheable &amp; reusable</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="css-l2" class="level-block searchable" data-tags="selectors universal element class id attribute descendant child sibling">
+    <h3 class="level-heading"><span class="level-num">Lvl 2</span> Selectors</h3>
+    <table class="ref-table">
+      <thead><tr><th>Selector</th><th>Syntax</th><th>Matches</th></tr></thead>
+      <tbody>
+        <tr><td>Universal</td><td><code>*</code></td><td>Every element</td></tr>
+        <tr><td>Element</td><td><code>p</code></td><td>All <code>&lt;p&gt;</code></td></tr>
+        <tr><td>Class</td><td><code>.card</code></td><td>Elements with <code>class="card"</code></td></tr>
+        <tr><td>ID</td><td><code>#hero</code></td><td>The one element with <code>id="hero"</code></td></tr>
+        <tr><td>Attribute</td><td><code>[type="text"]</code></td><td>Elements with that attribute/value</td></tr>
+        <tr><td>Descendant</td><td><code>nav a</code></td><td>Any <code>&lt;a&gt;</code> inside <code>&lt;nav&gt;</code>, any depth</td></tr>
+        <tr><td>Child</td><td><code>ul &gt; li</code></td><td>Only direct children</td></tr>
+        <tr><td>Adjacent sibling</td><td><code>h2 + p</code></td><td>The <code>&lt;p&gt;</code> immediately after an <code>&lt;h2&gt;</code></td></tr>
+        <tr><td>General sibling</td><td><code>h2 ~ p</code></td><td>Every <code>&lt;p&gt;</code> after that <code>&lt;h2&gt;</code></td></tr>
+        <tr><td>Group</td><td><code>h1, h2, h3</code></td><td>All three, same rule</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="css-l3" class="level-block searchable" data-tags="cascade specificity important inline id class pseudo element order">
+    <h3 class="level-heading"><span class="level-num">Lvl 3</span> Cascade &amp; Specificity</h3>
+    <div class="flow-diagram" aria-hidden="true">
+      <span class="flow-step">Importance</span><span class="flow-arrow">→</span>
+      <span class="flow-step">Origin</span><span class="flow-arrow">→</span>
+      <span class="flow-step">Specificity</span><span class="flow-arrow">→</span>
+      <span class="flow-step">Source order</span>
+    </div>
+    <table class="ref-table">
+      <caption>Specificity cheat table (highest wins)</caption>
+      <thead><tr><th>Rank</th><th>Selector type</th><th>Points</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><code>!important</code></td><td>Overrides everything (use sparingly!)</td></tr>
+        <tr><td>2</td><td>Inline <code>style=""</code></td><td>1,0,0,0</td></tr>
+        <tr><td>3</td><td>ID <code>#id</code></td><td>0,1,0,0</td></tr>
+        <tr><td>4</td><td>Class/attribute/pseudo-class <code>.cls</code> <code>[x]</code> <code>:hover</code></td><td>0,0,1,0</td></tr>
+        <tr><td>5</td><td>Element/pseudo-element <code>div</code> <code>::before</code></td><td>0,0,0,1</td></tr>
+      </tbody>
+    </table>
+    <p class="remember">📌 <strong>REMEMBER:</strong> equal specificity → the rule written <em>later</em> in the file wins.</p>
+  </article>
+
+  <article id="css-l4" class="level-block searchable" data-tags="box model content padding border margin width height box-sizing">
+    <h3 class="level-heading"><span class="level-num">Lvl 4</span> Box Model</h3>
+    <div class="box-model-diagram" aria-hidden="true">
+      <div class="bm-margin">margin
+        <div class="bm-border">border
+          <div class="bm-padding">padding
+            <div class="bm-content">content</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="syntax-block">
+<pre><code>* { box-sizing: border-box; } /* GOD-MODE default */
+
+.box {
+  width: 200px;
+  padding: 20px;
+  border: 2px solid #333;
+  margin: 10px;
+}</code></pre>
+    </div>
+    <p class="remember">📌 <strong>REMEMBER:</strong> with <code>box-sizing: border-box</code>, <code>width</code> includes padding + border — no more surprise overflow.</p>
+    <p class="trap">⚠️ <strong>TRAP:</strong> default <code>box-sizing: content-box</code> means padding/border are <em>added on top</em> of your set width.</p>
+  </article>
+
+  <article id="css-l5" class="level-block searchable" data-tags="color hex rgb rgba hsl font family size weight line-height letter-spacing text-align">
+    <h3 class="level-heading"><span class="level-num">Lvl 5</span> Colors, Text &amp; Fonts</h3>
+    <table class="ref-table">
+      <thead><tr><th>Format</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>HEX</td><td><code>#1e4fa3</code></td></tr>
+        <tr><td>RGB</td><td><code>rgb(30, 79, 163)</code></td></tr>
+        <tr><td>RGBA</td><td><code>rgba(30, 79, 163, 0.5)</code></td></tr>
+        <tr><td>HSL</td><td><code>hsl(215, 69%, 38%)</code></td></tr>
+        <tr><td>HSLA</td><td><code>hsla(215, 69%, 38%, 0.5)</code></td></tr>
+      </tbody>
+    </table>
+    <table class="ref-table">
+      <thead><tr><th>Property</th><th>Controls</th></tr></thead>
+      <tbody>
+        <tr><td><code>font-family</code></td><td>Typeface stack (always end with a generic like <code>sans-serif</code>)</td></tr>
+        <tr><td><code>font-size</code></td><td>Text size</td></tr>
+        <tr><td><code>font-weight</code></td><td>Boldness, 100–900</td></tr>
+        <tr><td><code>line-height</code></td><td>Vertical spacing between lines</td></tr>
+        <tr><td><code>letter-spacing</code></td><td>Space between characters</td></tr>
+        <tr><td><code>text-align</code></td><td>left / center / right / justify</td></tr>
+        <tr><td><code>text-decoration</code></td><td>underline / line-through / none</td></tr>
+        <tr><td><code>text-transform</code></td><td>uppercase / lowercase / capitalize</td></tr>
+        <tr><td><code>text-shadow</code></td><td><code>2px 2px 4px rgba(0,0,0,.4)</code></td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="css-l6" class="level-block searchable" data-tags="display block inline flex grid position static relative absolute fixed sticky z-index">
+    <h3 class="level-heading"><span class="level-num">Lvl 6</span> Display &amp; Positioning</h3>
+    <table class="ref-table">
+      <thead><tr><th>display</th><th>Behavior</th></tr></thead>
+      <tbody>
+        <tr><td><code>block</code></td><td>Full width, stacks vertically</td></tr>
+        <tr><td><code>inline</code></td><td>Flows in text, ignores width/height</td></tr>
+        <tr><td><code>inline-block</code></td><td>Flows in text, but respects width/height</td></tr>
+        <tr><td><code>none</code></td><td>Removed from layout entirely</td></tr>
+        <tr><td><code>flex</code></td><td>1-D flexible row/column layout</td></tr>
+        <tr><td><code>grid</code></td><td>2-D row-and-column layout</td></tr>
+      </tbody>
+    </table>
+    <table class="ref-table">
+      <thead><tr><th>position</th><th>Behavior</th></tr></thead>
+      <tbody>
+        <tr><td><code>static</code></td><td>Default — normal document flow</td></tr>
+        <tr><td><code>relative</code></td><td>Offset from its own normal position</td></tr>
+        <tr><td><code>absolute</code></td><td>Removed from flow, positioned to nearest positioned ancestor</td></tr>
+        <tr><td><code>fixed</code></td><td>Pinned to the viewport, ignores scroll</td></tr>
+        <tr><td><code>sticky</code></td><td>Normal flow until a scroll threshold, then sticks</td></tr>
+      </tbody>
+    </table>
+    <p class="remember">📌 <strong>REMEMBER:</strong> <code>z-index</code> only works on positioned elements (anything except <code>static</code>).</p>
+  </article>
+
+  <article id="css-l7" class="level-block searchable" data-tags="flexbox flex-direction justify-content align-items gap grow shrink basis order">
+    <h3 class="level-heading"><span class="level-num">Lvl 7</span> Flexbox Master Sheet</h3>
+    <p class="mnemonic">🧠 <strong>Mnemonic:</strong> <em>justify-content</em> = the <strong>main</strong> axis (→ by default), <em>align-items</em> = the <strong>cross</strong> axis (↓ by default).</p>
+    <div class="flex-diagram" aria-hidden="true">
+      <div class="fd-container">
+        <div class="fd-item">1</div><div class="fd-item">2</div><div class="fd-item">3</div>
+      </div>
+      <div class="fd-axis-label">justify-content →</div>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Property</th><th>On</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td><code>display:flex</code></td><td>parent</td><td>Turns on flexbox</td></tr>
+        <tr><td><code>flex-direction</code></td><td>parent</td><td>row / column / row-reverse / column-reverse</td></tr>
+        <tr><td><code>flex-wrap</code></td><td>parent</td><td>nowrap / wrap onto new lines</td></tr>
+        <tr><td><code>justify-content</code></td><td>parent</td><td>Aligns items on the <strong>main</strong> axis</td></tr>
+        <tr><td><code>align-items</code></td><td>parent</td><td>Aligns items on the <strong>cross</strong> axis</td></tr>
+        <tr><td><code>align-content</code></td><td>parent</td><td>Aligns wrapped <em>lines</em> (needs multiple rows)</td></tr>
+        <tr><td><code>gap</code></td><td>parent</td><td>Space between items, no margin hacks</td></tr>
+        <tr><td><code>flex-grow</code></td><td>child</td><td>How much it expands into free space</td></tr>
+        <tr><td><code>flex-shrink</code></td><td>child</td><td>How much it shrinks under pressure</td></tr>
+        <tr><td><code>flex-basis</code></td><td>child</td><td>Starting size before grow/shrink</td></tr>
+        <tr><td><code>order</code></td><td>child</td><td>Visual reordering without touching HTML</td></tr>
+        <tr><td><code>align-self</code></td><td>child</td><td>Overrides parent's <code>align-items</code> for one item</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="css-l8" class="level-block searchable" data-tags="css grid template columns rows repeat minmax auto-fit auto-fill areas">
+    <h3 class="level-heading"><span class="level-num">Lvl 8</span> CSS Grid</h3>
+    <div class="syntax-block">
+<pre><code>.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+}
+
+.wide-card { grid-column: span 2; }
+
+/* Responsive card grid, no media query needed */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}</code></pre>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Property/function</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td><code>repeat(n, size)</code></td><td>Repeats a track pattern n times</td></tr>
+        <tr><td><code>minmax(min, max)</code></td><td>Track never smaller/larger than given bounds</td></tr>
+        <tr><td><code>auto-fit</code></td><td>Collapses empty tracks — items stretch to fill row</td></tr>
+        <tr><td><code>auto-fill</code></td><td>Keeps empty tracks — items stay their size</td></tr>
+        <tr><td><code>grid-template-areas</code></td><td>Names layout regions as ASCII-art strings</td></tr>
+        <tr><td><code>grid-column</code>/<code>grid-row</code></td><td>Places/spans an item across tracks</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="css-l9" class="level-block searchable" data-tags="responsive viewport media query mobile-first units em rem vw vh clamp">
+    <h3 class="level-heading"><span class="level-num">Lvl 9</span> Responsive Design</h3>
+    <div class="syntax-block">
+<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+/* Mobile-first: base styles = phone, then scale UP */
+.card { padding: 12px; }
+
+@media (min-width: 768px) {
+  .card { padding: 24px; }
+}</code></pre>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Unit</th><th>Meaning</th><th>Common use</th></tr></thead>
+      <tbody>
+        <tr><td><code>%</code></td><td>Relative to parent</td><td>Fluid widths</td></tr>
+        <tr><td><code>em</code></td><td>Relative to parent font-size</td><td>Component-scoped scaling</td></tr>
+        <tr><td><code>rem</code></td><td>Relative to root font-size</td><td>Predictable global scaling</td></tr>
+        <tr><td><code>vw</code>/<code>vh</code></td><td>1% of viewport width/height</td><td>Full-bleed heroes</td></tr>
+        <tr><td><code>vmin</code>/<code>vmax</code></td><td>1% of smaller/larger viewport side</td><td>Square elements that scale</td></tr>
+        <tr><td><code>clamp(min, ideal, max)</code></td><td>Fluid value with hard bounds</td><td><code>font-size: clamp(1rem, 2vw, 1.5rem)</code></td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article id="css-l10" class="level-block searchable" data-tags="pseudo-class pseudo-element transition transform animation keyframes gradient shadow filter variable calc">
+    <h3 class="level-heading"><span class="level-num">Lvl 10</span> Advanced CSS — God Mode</h3>
+    <div class="syntax-block">
+<pre><code>:root { --brand: #1e4fa3; }
+
+.btn {
+  background: var(--brand);
+  transition: transform .2s ease;
+}
+.btn:hover { transform: scale(1.05); }
+.btn::before { content: "→ "; }
+
+@keyframes pop {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card { animation: pop .3s ease-out; }
+
+.w { width: calc(100% - 40px); }
+.h { height: min(50vh, 400px); }
+.aspect { aspect-ratio: 16 / 9; object-fit: cover; }</code></pre>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Concept</th><th>One-line meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Pseudo-class</td><td>State-based selector: <code>:hover</code>, <code>:focus</code>, <code>:nth-child()</code></td></tr>
+        <tr><td>Pseudo-element</td><td>Targets a sub-part: <code>::before</code>, <code>::after</code>, <code>::placeholder</code></td></tr>
+        <tr><td>Transition</td><td>Smoothly animates a property change</td></tr>
+        <tr><td>Transform</td><td>Move/scale/rotate/skew without affecting layout</td></tr>
+        <tr><td>Keyframe animation</td><td>Multi-step animation independent of a trigger</td></tr>
+        <tr><td>Gradient</td><td><code>linear-gradient()</code> / <code>radial-gradient()</code> backgrounds</td></tr>
+        <tr><td>CSS variable</td><td><code>--name: value;</code> then <code>var(--name)</code></td></tr>
+        <tr><td><code>calc()</code>/<code>min()</code>/<code>max()</code>/<code>clamp()</code></td><td>Math &amp; fluid sizing directly in CSS</td></tr>
+        <tr><td><code>overflow</code></td><td>visible / hidden / scroll / auto for content that doesn't fit</td></tr>
+        <tr><td><code>scroll-behavior: smooth</code></td><td>Native smooth-scroll for anchor jumps</td></tr>
+      </tbody>
+    </table>
+  </article>
+</section>
+
+<!-- ======================================================= -->
+<!-- ================ 3. JAVASCRIPT SECTION =============== -->
+<!-- ======================================================= -->
+<section id="js-section" class="subject" data-subject="JavaScript">
+  <div class="subject-tab subject-tab--js">JS</div>
+  <h2 class="subject-title">Part 3 — JavaScript <span class="subject-sub">behavior &amp; logic</span></h2>
+
+  <article id="js-l1" class="level-block searchable" data-tags="javascript variables let const var comments statements expressions">
+    <h3 class="level-heading"><span class="level-num">Lvl 1</span> Fundamentals</h3>
+    <div class="syntax-block">
+<pre><code>let age = 21;        // can change later
+const name = "Rhea";  // cannot be reassigned
+var old = "avoid me"; // function-scoped, legacy
+
+// This is a comment
+console.log(name, age); // statement</code></pre>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Keyword</th><th>Scope</th><th>Reassignable?</th></tr></thead>
+      <tbody>
+        <tr><td><code>let</code></td><td>Block <code>{ }</code></td><td>Yes</td></tr>
+        <tr><td><code>const</code></td><td>Block <code>{ }</code></td><td>No (object/array <em>contents</em> can still change)</td></tr>
+        <tr><td><code>var</code></td><td>Function (ignores blocks)</td><td>Yes — but avoid it</td></tr>
+      </tbody>
+    </table>
+    <p class="remember">📌 <strong>REMEMBER:</strong> default to <code>const</code>. Use <code>let</code> only when you know the value will change. Never use <code>var</code> in new code.</p>
+  </article>
+
+  <article id="js-l2" class="level-block searchable" data-tags="data types string number boolean undefined null symbol object primitive reference bigint">
+    <h3 class="level-heading"><span class="level-num">Lvl 2</span> Data Types</h3>
+    <table class="ref-table">
+      <thead><tr><th>Type</th><th>Example</th><th>Primitive?</th></tr></thead>
+      <tbody>
+        <tr><td>string</td><td><code>"hi"</code></td><td>Yes</td></tr>
+        <tr><td>number</td><td><code>42</code>, <code>3.14</code></td><td>Yes</td></tr>
+        <tr><td>bigint</td><td><code>9007199254740993n</code></td><td>Yes</td></tr>
+        <tr><td>boolean</td><td><code>true</code>/<code>false</code></td><td>Yes</td></tr>
+        <tr><td>undefined</td><td>Declared, no value yet</td><td>Yes</td></tr>
+        <tr><td>null</td><td>Intentional "nothing"</td><td>Yes</td></tr>
+        <tr><td>symbol</td><td>Unique identifier</td><td>Yes</td></tr>
+        <tr><td>object</td><td><code>{}</code>, <code>[]</code>, functions</td><td>No — reference type</td></tr>
+      </tbody>
+    </table>
+    <p class="trap">⚠️ <strong>TRAP:</strong> primitives copy by <em>value</em>; objects/arrays copy by <em>reference</em> — mutating a copy mutates the original too.</p>
+  </article>
+
+  <article id="js-l3" class="level-block searchable" data-tags="operators arithmetic comparison logical ternary nullish optional chaining bitwise precedence">
+    <h3 class="level-heading"><span class="level-num">Lvl 3</span> Operators</h3>
+    <table class="ref-table">
+      <thead><tr><th>Category</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Arithmetic</td><td><code>+ - * / % **</code></td></tr>
+        <tr><td>Assignment</td><td><code>= += -= *= /=</code></td></tr>
+        <tr><td>Comparison</td><td><code>== != === !== &lt; &gt; &lt;= &gt;=</code></td></tr>
+        <tr><td>Logical</td><td><code>&amp;&amp; || !</code></td></tr>
+        <tr><td>Ternary</td><td><code>cond ? a : b</code></td></tr>
+        <tr><td>Nullish coalescing</td><td><code>value ?? "default"</code> (only falls back on <code>null</code>/<code>undefined</code>)</td></tr>
+        <tr><td>Optional chaining</td><td><code>user?.address?.city</code> (safe on missing nesting)</td></tr>
+        <tr><td>Bitwise</td><td><code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code></td></tr>
+      </tbody>
+    </table>
+    <p class="remember">📌 <strong>REMEMBER:</strong> always use <code>===</code> / <code>!==</code>. Loose <code>==</code> silently coerces types and causes bugs.</p>
+  </article>
+
+  <article id="js-l4" class="level-block searchable" data-tags="if else switch ternary conditions">
+    <h3 class="level-heading"><span class="level-num">Lvl 4</span> Conditions</h3>
+    <div class="syntax-block">
+<pre><code>if (score &gt;= 90) {
+  grade = "A";
+} else if (score &gt;= 75) {
+  grade = "B";
+} else {
+  grade = "C";
+}
+
+switch (day) {
+  case "Mon": task = "Gym"; break;
+  case "Sun": task = "Rest"; break;
+  default:    task = "Study";
+}
+
+const label = age &gt;= 18 ? "Adult" : "Minor"; // ternary</code></pre>
+    </div>
+    <p class="trap">⚠️ <strong>TRAP:</strong> forgetting <code>break</code> in a <code>switch</code> — execution "falls through" into the next case.</p>
+  </article>
+
+  <article id="js-l5" class="level-block searchable" data-tags="loops for while do-while for-of for-in">
+    <h3 class="level-heading"><span class="level-num">Lvl 5</span> Loops</h3>
+    <table class="ref-table">
+      <thead><tr><th>Loop</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><code>for (let i=0; i&lt;n; i++)</code></td><td>Known number of iterations, need the index</td></tr>
+        <tr><td><code>while (cond)</code></td><td>Unknown iterations, check-first</td></tr>
+        <tr><td><code>do { } while (cond)</code></td><td>Same, but always runs at least once</td></tr>
+        <tr><td><code>for (const v of arr)</code></td><td>Values of an array/string/Map/Set — most common</td></tr>
+        <tr><td><code>for (const k in obj)</code></td><td>Enumerable keys of a plain object</td></tr>
+      </tbody>
+    </table>
+    <p class="remember">📌 <strong>REMEMBER:</strong> <code>for...of</code> → values (arrays). <code>for...in</code> → keys (objects). Mixing them up is a classic bug.</p>
+  </article>
+
+  <article id="js-l6" class="level-block searchable" data-tags="functions declaration expression arrow parameters arguments return default rest callback">
+    <h3 class="level-heading"><span class="level-num">Lvl 6</span> Functions</h3>
+    <div class="syntax-block">
+<pre><code>function add(a, b) { return a + b; }       // declaration
+
+const sub = function (a, b) { return a - b; }; // expression
+
+const mul = (a, b) => a * b;               // arrow function
+
+function greet(name = "friend") { ... }    // default parameter
+
+function sum(...nums) {                    // rest parameter
+  return nums.reduce((t, n) =&gt; t + n, 0);
+}
+
+function onClick(callback) { callback(); } // higher-order/callback</code></pre>
+    </div>
+    <p class="trap">⚠️ <strong>TRAP:</strong> arrow functions don't have their own <code>this</code> — they inherit it from the surrounding scope.</p>
+  </article>
+
+  <article id="js-l7" class="level-block searchable" data-tags="arrays push pop shift unshift slice splice map filter reduce foreach find sort">
+    <h3 class="level-heading"><span class="level-num">Lvl 7</span> Arrays</h3>
+    <table class="ref-table">
+      <caption>Array-method cheat table</caption>
+      <thead><tr><th>Method</th><th>Purpose</th><th>Returns</th><th>Mutates?</th></tr></thead>
+      <tbody>
+        <tr><td><code>push(x)</code></td><td>Add to end</td><td>New length</td><td>Yes</td></tr>
+        <tr><td><code>pop()</code></td><td>Remove from end</td><td>Removed item</td><td>Yes</td></tr>
+        <tr><td><code>shift()</code></td><td>Remove from start</td><td>Removed item</td><td>Yes</td></tr>
+        <tr><td><code>unshift(x)</code></td><td>Add to start</td><td>New length</td><td>Yes</td></tr>
+        <tr><td><code>slice(a,b)</code></td><td>Extract a copy</td><td>New array</td><td>No</td></tr>
+        <tr><td><code>splice(i,n)</code></td><td>Insert/remove in place</td><td>Removed items</td><td>Yes</td></tr>
+        <tr><td><code>concat()</code></td><td>Merge arrays</td><td>New array</td><td>No</td></tr>
+        <tr><td><code>includes(x)</code></td><td>Existence check</td><td>Boolean</td><td>No</td></tr>
+        <tr><td><code>indexOf(x)</code></td><td>Find position</td><td>Index or -1</td><td>No</td></tr>
+        <tr><td><code>find(fn)</code></td><td>First matching element</td><td>Element or undefined</td><td>No</td></tr>
+        <tr><td><code>findIndex(fn)</code></td><td>First matching index</td><td>Index or -1</td><td>No</td></tr>
+        <tr><td><code>filter(fn)</code></td><td>Keep matching elements</td><td>New array</td><td>No</td></tr>
+        <tr><td><code>map(fn)</code></td><td>Transform every element</td><td>New array</td><td>No</td></tr>
+        <tr><td><code>reduce(fn, init)</code></td><td>Fold into one value</td><td>Any value</td><td>No</td></tr>
+        <tr><td><code>forEach(fn)</code></td><td>Loop, no return</td><td>undefined</td><td>No</td></tr>
+        <tr><td><code>some(fn)</code></td><td>At least one matches?</td><td>Boolean</td><td>No</td></tr>
+        <tr><td><code>every(fn)</code></td><td>All match?</td><td>Boolean</td><td>No</td></tr>
+        <tr><td><code>sort(fn)</code></td><td>Order elements</td><td>Same array</td><td>Yes</td></tr>
+        <tr><td><code>reverse()</code></td><td>Flip order</td><td>Same array</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+    <p class="trap">⚠️ <strong>TRAP:</strong> <code>sort()</code> converts to strings by default — <code>[10,2,1].sort()</code> gives <code>[1,10,2]</code>. Pass a compare function: <code>(a,b)=&gt;a-b</code>.</p>
+  </article>
+
+  <article id="js-l8" class="level-block searchable" data-tags="objects properties methods dot bracket destructuring spread computed object.keys values entries">
+    <h3 class="level-heading"><span class="level-num">Lvl 8</span> Objects</h3>
+    <div class="syntax-block">
+<pre><code>const user = { name: "Dev", age: 20 };
+
+user.name;        // dot notation
+user["age"];      // bracket notation (needed for dynamic keys)
+
+const { name, age } = user;      // destructuring
+const clone = { ...user, age: 21 }; // spread + override
+
+const key = "role";
+const obj = { [key]: "admin" };  // computed property
+
+Object.keys(user);    // ["name", "age"]
+Object.values(user);  // ["Dev", 20]
+Object.entries(user);  // [["name","Dev"],["age",20]]</code></pre>
+    </div>
+  </article>
+
+  <article id="js-l9" class="level-block searchable" data-tags="dom getElementById queryselector createElement appendChild textContent innerHTML classList style">
+    <h3 class="level-heading"><span class="level-num">Lvl 9</span> The DOM</h3>
+    <table class="ref-table">
+      <thead><tr><th>Method / Property</th><th>Does</th></tr></thead>
+      <tbody>
+        <tr><td><code>document.getElementById("x")</code></td><td>Finds one element by id</td></tr>
+        <tr><td><code>document.querySelector(".x")</code></td><td>Finds the first match of any CSS selector</td></tr>
+        <tr><td><code>document.querySelectorAll(".x")</code></td><td>Finds all matches (NodeList)</td></tr>
+        <tr><td><code>document.createElement("div")</code></td><td>Creates a new, detached element</td></tr>
+        <tr><td><code>parent.append(child)</code></td><td>Adds node(s) or text at the end</td></tr>
+        <tr><td><code>parent.appendChild(child)</code></td><td>Adds one node at the end (older API)</td></tr>
+        <tr><td><code>el.remove()</code></td><td>Removes the element from the DOM</td></tr>
+        <tr><td><code>el.textContent</code></td><td>Plain text — safe, no HTML parsing</td></tr>
+        <tr><td><code>el.innerHTML</code></td><td>Parsed HTML — powerful but risky (XSS)</td></tr>
+        <tr><td><code>el.classList.add/remove/toggle()</code></td><td>Manage CSS classes</td></tr>
+        <tr><td><code>el.style.prop</code></td><td>Set one inline CSS property directly</td></tr>
+      </tbody>
+    </table>
+    <div class="syntax-block">
+<pre><code>const list = document.querySelector("#list");
+const li = document.createElement("li");
+li.textContent = "New item";
+list.append(li);</code></pre>
+    </div>
+    <p class="trap">⚠️ <strong>TRAP:</strong> setting <code>innerHTML</code> with user-typed input is a classic XSS hole. Prefer <code>textContent</code> for plain text.</p>
+  </article>
+
+  <article id="js-l10" class="level-block searchable" data-tags="events click input change submit keydown keyup addEventListener preventDefault bubbling delegation">
+    <h3 class="level-heading"><span class="level-num">Lvl 10</span> Events</h3>
+    <div class="syntax-block">
+<pre><code>button.addEventListener("click", (e) =&gt; {
+  e.preventDefault();       // stop default action (e.g. form submit)
+  console.log(e.target);    // element that triggered it
+});
+
+// Event delegation: one listener, many children
+list.addEventListener("click", (e) =&gt; {
+  if (e.target.matches("li")) console.log("Item:", e.target.textContent);
+});</code></pre>
+    </div>
+    <table class="ref-table">
+      <thead><tr><th>Event</th><th>Fires when…</th></tr></thead>
+      <tbody>
+        <tr><td><code>click</code></td><td>Element is clicked/tapped</td></tr>
+        <tr><td><code>input</code></td><td>Value changes, on every keystroke</td></tr>
+        <tr><td><code>change</code></td><td>Value changes, confirmed (e.g. on blur)</td></tr>
+        <tr><td><code>submit</code></td><td>A form is submitted</td></tr>
+        <tr><td><code>keydown</code>/<code>keyup</code></td><td>A key is pressed/released</td></tr>
+        <tr><td><code>mouseenter</code>/<code>mouseleave</code></td><td>Pointer enters/exits an element</td></tr>
+      </tbody>
+    </table>
+    <p class="remember">📌 <strong>REMEMBER:</strong> events <em>bubble</em> from child to parent. Delegation puts one listener on a parent instead of many on children.</p>
+  </article>
+
+  <article id="js-async" class="level-block searchable" data-tags="asynchronous promises then catch finally async await fetch json try catch">
+    <h3 class="level-heading"><span class="level-num">Part 7</span> Asynchronous JavaScript</h3>
+    <div class="flow-diagram" aria-hidden="true">
+      <span class="flow-step">Request</span><span class="flow-arrow">→</span>
+      <span class="flow-step">Promise</span><span class="flow-arrow">→</span>
+      <span class="flow-step">Resolve / Reject</span><span class="flow-arrow">→</span>
+      <span class="flow-step">await</span><span class="flow-arrow">→</span>
+      <span class="flow-step">Result</span>
+    </div>
+    <div class="syntax-block">
+<pre><code>// Promise style
+fetch("/api/user")
+  .then(res =&gt; res.json())
+  .then(data =&gt; console.log(data))
+  .catch(err =&gt; console.error(err))
+  .finally(() =&gt; console.log("done"));
+
+// async/await style (cleaner)
+async function loadUser() {
+  try {
+    const res = await fetch("/api/user");
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}</code></pre>
+    </div>
+    <p class="remember">📌 <strong>REMEMBER:</strong> <code>await</code> only works inside an <code>async</code> function (or a top-level module).</p>
+    <p class="trap">⚠️ <strong>TRAP:</strong> forgetting <code>await</code> — you'll log a pending <code>Promise</code> object instead of the actual data.</p>
+  </article>
+
+  <article id="js-advanced" class="level-block searchable" data-tags="scope closures hoisting execution context call stack event loop this bind call apply prototype class inheritance modules">
+    <h3 class="level-heading"><span class="level-num">Part 8</span> Advanced JavaScript</h3>
+
+    <div class="concept-card">
+      <p class="what"><strong>WHAT — Closure:</strong> a function that "remembers" variables from where it was created, even after that outer function has finished.</p>
+      <div class="syntax-block">
+<pre><code>function makeCounter() {
+  let count = 0;
+  return () =&gt; ++count; // remembers `count` forever
+}
+const counter = makeCounter();
+counter(); // 1
+counter(); // 2</code></pre>
+      </div>
+      <p class="remember">📌 <strong>REMEMBER:</strong> closures power private state, memoization, and event-handler factories.</p>
+    </div>
+
+    <table class="ref-table">
+      <thead><tr><th>Concept</th><th>One-line meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Lexical scope</td><td>A variable's visibility is decided by where it's <em>written</em>, not called</td></tr>
+        <tr><td>Hoisting</td><td><code>var</code>/function declarations are lifted to the top of scope before execution</td></tr>
+        <tr><td>Execution context</td><td>The environment (variables, <code>this</code>) a piece of code runs in</td></tr>
+        <tr><td>Call stack</td><td>Tracks which functions are currently running, LIFO order</td></tr>
+        <tr><td>Event loop</td><td>Moves finished async callbacks from queues onto the call stack</td></tr>
+        <tr><td>Microtasks</td><td>Promise callbacks — run before macrotasks, after current code</td></tr>
+        <tr><td>Macrotasks</td><td><code>setTimeout</code>, UI events — run after all microtasks</td></tr>
+        <tr><td><code>this</code></td><td>Depends on <em>how</em> a function is called, not where it's defined</td></tr>
+        <tr><td><code>bind()</code></td><td>Returns a new function permanently locked to a given <code>this</code></td></tr>
+        <tr><td><code>call()</code>/<code>apply()</code></td><td>Invoke immediately with a chosen <code>this</code> (apply takes an array of args)</td></tr>
+        <tr><td>Prototype</td><td>The object an instance falls back to for inherited properties/methods</td></tr>
+        <tr><td><code>class</code>/<code>extends</code></td><td>Syntax sugar over prototypal inheritance</td></tr>
+        <tr><td>Modules (<code>import</code>/<code>export</code>)</td><td>Split code across files with explicit, scoped dependencies</td></tr>
+      </tbody>
+    </table>
+    <div class="syntax-block">
+<pre><code>class Animal {
+  constructor(name) { this.name = name; }
+  speak() { return `${this.name} makes a sound`; }
+}
+class Dog extends Animal {
+  speak() { return `${this.name} barks`; }
+}
+
+// modules (in separate files)
+export function add(a, b) { return a + b; }
+import { add } from "./math.js";</code></pre>
+    </div>
+  </article>
+
+  <article id="js-builtins" class="level-block searchable" data-tags="math date json string array object number set map regexp built-ins">
+    <h3 class="level-heading"><span class="level-num">Part 9</span> Built-in Objects — Quick Reference</h3>
+    <div class="builtin-grid">
+      <table class="ref-table"><caption>Math</caption><tbody>
+        <tr><td><code>Math.round/floor/ceil(x)</code></td><td>Rounding</td></tr>
+        <tr><td><code>Math.max/min(...)</code></td><td>Largest/smallest</td></tr>
+        <tr><td><code>Math.random()</code></td><td>0 to &lt;1 random float</td></tr>
+        <tr><td><code>Math.abs(x)</code></td><td>Absolute value</td></tr>
+      </tbody></table>
+      <table class="ref-table"><caption>Date</caption><tbody>
+        <tr><td><code>new Date()</code></td><td>Current date/time</td></tr>
+        <tr><td><code>.getFullYear()/.getMonth()/.getDate()</code></td><td>Read parts</td></tr>
+        <tr><td><code>.getTime()</code></td><td>Milliseconds since epoch</td></tr>
+      </tbody></table>
+      <table class="ref-table"><caption>JSON</caption><tbody>
+        <tr><td><code>JSON.stringify(obj)</code></td><td>Object → JSON string</td></tr>
+        <tr><td><code>JSON.parse(str)</code></td><td>JSON string → object</td></tr>
+      </tbody></table>
+      <table class="ref-table"><caption>String</caption><tbody>
+        <tr><td><code>.length</code></td><td>Character count</td></tr>
+        <tr><td><code>.slice/.substring()</code></td><td>Extract a portion</td></tr>
+        <tr><td><code>.toUpperCase/toLowerCase()</code></td><td>Case conversion</td></tr>
+        <tr><td><code>.trim()</code></td><td>Remove edge whitespace</td></tr>
+        <tr><td><code>.split(sep)</code></td><td>String → array</td></tr>
+        <tr><td><code>.replace(a,b)</code></td><td>Substitute text</td></tr>
+        <tr><td><code>.includes(sub)</code></td><td>Contains check</td></tr>
+        <tr><td><code>` `template ${x}` `</code></td><td>Template literal interpolation</td></tr>
+      </tbody></table>
+      <table class="ref-table"><caption>Number</caption><tbody>
+        <tr><td><code>Number("42")</code></td><td>Parse to number</td></tr>
+        <tr><td><code>.toFixed(2)</code></td><td>Fixed decimal places (string)</td></tr>
+        <tr><td><code>Number.isInteger(x)</code></td><td>Type check</td></tr>
+      </tbody></table>
+      <table class="ref-table"><caption>Set / Map</caption><tbody>
+        <tr><td><code>new Set([1,2,2])</code></td><td>Unique values collection</td></tr>
+        <tr><td><code>new Map()</code></td><td>Key-value pairs, any key type</td></tr>
+        <tr><td><code>.has/.add/.delete()</code></td><td>Common Set/Map operations</td></tr>
+      </tbody></table>
+      <table class="ref-table"><caption>RegExp</caption><tbody>
+        <tr><td><code>/pattern/flags</code></td><td>Regex literal</td></tr>
+        <tr><td><code>.test(str)</code></td><td>Boolean match check</td></tr>
+        <tr><td><code>str.match(/re/)</code></td><td>Returns match details</td></tr>
+      </tbody></table>
+    </div>
+  </article>
+
+  <article id="js-webapis" class="level-block searchable" data-tags="localstorage sessionstorage cookies clipboard geolocation fetch history url timers web apis">
+    <h3 class="level-heading"><span class="level-num">Part 10</span> Web APIs</h3>
+    <table class="ref-table">
+      <thead><tr><th>API</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td><code>localStorage.setItem/getItem</code></td><td>Persist small data across sessions</td></tr>
+        <tr><td><code>sessionStorage</code></td><td>Same, but cleared when the tab closes</td></tr>
+        <tr><td><code>document.cookie</code></td><td>Small data sent with every request to the server</td></tr>
+        <tr><td><code>navigator.clipboard.writeText()</code></td><td>Copy text to the clipboard</td></tr>
+        <tr><td><code>navigator.geolocation.getCurrentPosition()</code></td><td>Ask for the user's location</td></tr>
+        <tr><td><code>fetch(url)</code></td><td>Make an HTTP request, returns a Promise</td></tr>
+        <tr><td><code>history.pushState()</code></td><td>Change the URL without a full reload</td></tr>
+        <tr><td><code>new URL(str)</code></td><td>Parse a URL into parts (params, host, path)</td></tr>
+        <tr><td><code>setTimeout(fn, ms)</code>/<code>setInterval(fn, ms)</code></td><td>Delay or repeat code execution</td></tr>
+      </tbody>
+    </table>
+  </article>
+</section>
+
+<!-- ======================================================= -->
+<!-- ============= 4. INTEGRATION / MINI PROJECTS ========= -->
+<!-- ======================================================= -->
+<section id="integration-section" class="subject" data-subject="Projects">
+  <div class="subject-tab subject-tab--proj">PROJECTS</div>
+  <h2 class="subject-title">Part 4 — HTML + CSS + JS, together</h2>
+  <p class="section-intro">Eight tiny projects that combine everything above. Expand each to see the code.</p>
+
+  <article class="project-card searchable" data-tags="project form validation">
+    <h3>1. Form + Validation</h3>
+    <p class="how">HTML builds the fields, CSS styles error/success states, JS blocks submission until valid.</p>
+    <details><summary>Show code</summary>
+<pre><code>&lt;form id="f"&gt;
+  &lt;input id="email" type="email" required&gt;
+  &lt;p id="err" class="error" hidden&gt;Enter a valid email&lt;/p&gt;
+  &lt;button&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+f.addEventListener("submit", (e) =&gt; {
+  e.preventDefault();
+  const ok = email.checkValidity();
+  err.hidden = ok;
+  if (ok) console.log("Submitted:", email.value);
+});
+&lt;/script&gt;</code></pre>
+    </details>
+  </article>
+
+  <article class="project-card searchable" data-tags="project counter">
+    <h3>2. Counter</h3>
+    <p class="how">Two buttons mutate a number kept in a JS variable and re-render it into the DOM.</p>
+    <details><summary>Show code</summary>
+<pre><code>&lt;button id="dec"&gt;-&lt;/button&gt;
+&lt;span id="count"&gt;0&lt;/span&gt;
+&lt;button id="inc"&gt;+&lt;/button&gt;
+&lt;script&gt;
+let n = 0;
+const render = () =&gt; count.textContent = n;
+inc.addEventListener("click", () =&gt; { n++; render(); });
+dec.addEventListener("click", () =&gt; { n--; render(); });
+&lt;/script&gt;</code></pre>
+    </details>
+  </article>
+
+  <article class="project-card searchable" data-tags="project todo list">
+    <h3>3. To-Do List</h3>
+    <p class="how">An array of tasks is the "source of truth"; every change re-renders the list from that array.</p>
+    <details><summary>Show code</summary>
+<pre><code>&lt;input id="task"&gt;&lt;button id="add"&gt;Add&lt;/button&gt;
+&lt;ul id="list"&gt;&lt;/ul&gt;
+&lt;script&gt;
+const todos = [];
+function render() {
+  list.innerHTML = "";
+  todos.forEach((t, i) =&gt; {
+    const li = document.createElement("li");
+    li.textContent = t;
+    li.onclick = () =&gt; { todos.splice(i, 1); render(); };
+    list.append(li);
+  });
+}
+add.addEventListener("click", () =&gt; {
+  if (!task.value.trim()) return;
+  todos.push(task.value); task.value = ""; render();
+});
+&lt;/script&gt;</code></pre>
+    </details>
+  </article>
+
+  <article class="project-card searchable" data-tags="project dark mode toggle">
+    <h3>4. Dark-Mode Toggle</h3>
+    <p class="how">A <code>data-theme</code> attribute on <code>&lt;html&gt;</code> switches which set of CSS variables applies; JS flips it and saves the choice.</p>
+    <details><summary>Show code</summary>
+<pre><code>:root[data-theme="dark"] { --bg: #111; --fg: #eee; }
+&lt;script&gt;
+btn.addEventListener("click", () =&gt; {
+  const next = html.dataset.theme === "dark" ? "light" : "dark";
+  html.dataset.theme = next;
+  localStorage.setItem("theme", next);
+});
+&lt;/script&gt;</code></pre>
+    </details>
+  </article>
+
+  <article class="project-card searchable" data-tags="project calculator">
+    <h3>5. Calculator</h3>
+    <p class="how">Button clicks append to a display string; <code>=</code> safely evaluates only digits/operators.</p>
+    <details><summary>Show code</summary>
+<pre><code>&lt;input id="disp" readonly&gt;
+&lt;button data-v="7"&gt;7&lt;/button&gt; &lt;button data-v="+"&gt;+&lt;/button&gt;
+&lt;button id="eq"&gt;=&lt;/button&gt;
+&lt;script&gt;
+document.querySelectorAll("[data-v]").forEach(b =&gt;
+  b.addEventListener("click", () =&gt; disp.value += b.dataset.v));
+eq.addEventListener("click", () =&gt; {
+  if (/^[0-9+\-*/.\s]+$/.test(disp.value)) disp.value = eval(disp.value);
+});
+&lt;/script&gt;</code></pre>
+    </details>
+    <p class="trap">⚠️ Real apps should avoid <code>eval()</code> — this demo restricts input to digits/operators first to stay safe.</p>
+  </article>
+
+  <article class="project-card searchable" data-tags="project modal">
+    <h3>6. Modal</h3>
+    <p class="how">The native <code>&lt;dialog&gt;</code> element handles focus-trapping and the backdrop for free.</p>
+    <details><summary>Show code</summary>
+<pre><code>&lt;dialog id="d"&gt;&lt;p&gt;Hello!&lt;/p&gt;&lt;button id="close"&gt;Close&lt;/button&gt;&lt;/dialog&gt;
+&lt;button id="open"&gt;Open modal&lt;/button&gt;
+&lt;script&gt;
+open.addEventListener("click", () =&gt; d.showModal());
+close.addEventListener("click", () =&gt; d.close());
+&lt;/script&gt;</code></pre>
+    </details>
+  </article>
+
+  <article class="project-card searchable" data-tags="project responsive navigation menu hamburger">
+    <h3>7. Responsive Nav Menu</h3>
+    <p class="how">A checkbox or JS toggle switches a <code>.open</code> class; CSS decides how the menu looks per breakpoint.</p>
+    <details><summary>Show code</summary>
+<pre><code>&lt;button id="hamburger"&gt;☰&lt;/button&gt;
+&lt;nav id="menu"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/nav&gt;
+&lt;style&gt;
+#menu { display: none; }
+#menu.open { display: flex; flex-direction: column; }
+@media (min-width: 768px) { #menu, #hamburger{display:flex} #hamburger{display:none} }
+&lt;/style&gt;
+&lt;script&gt;
+hamburger.addEventListener("click", () =&gt; menu.classList.toggle("open"));
+&lt;/script&gt;</code></pre>
+    </details>
+  </article>
+
+  <article class="project-card searchable" data-tags="project quiz application">
+    <h3>8. Quiz Application</h3>
+    <p class="how">An array of question objects drives the render; score increments on correct answers, same pattern used in Exam Mode below.</p>
+    <details><summary>Show code</summary>
+<pre><code>const qs = [{ q: "2+2?", options: ["3","4"], correct: 1 }];
+let i = 0, score = 0;
+function render() {
+  qEl.textContent = qs[i].q;
+  optsEl.innerHTML = qs[i].options
+    .map((o, idx) =&gt; `&lt;button data-i="${idx}"&gt;${o}&lt;/button&gt;`).join("");
+}
+optsEl.addEventListener("click", (e) =&gt; {
+  if (+e.target.dataset.i === qs[i].correct) score++;
+  i++; i &lt; qs.length ? render() : showScore();
+});</code></pre>
+    </details>
+  </article>
+</section>
+
+<!-- ======================================================= -->
+<!-- ============= 5. GOD-MODE QUICK REFERENCE ============= -->
+<!-- ======================================================= -->
+<section id="quickref-section" class="subject" data-subject="Quick Reference">
+  <div class="subject-tab subject-tab--ref">QUICK REF</div>
+  <h2 class="subject-title">Part 5 — God-Mode Quick Reference</h2>
+  <p class="section-intro">The night-before-the-exam cram page. Ultra-dense, no fluff.</p>
+
+  <div class="cram-grid">
+    <table class="ref-table cram searchable" data-tags="quick reference html tags"><caption>Most-used HTML</caption><tbody>
+      <tr><td><code>div span</code></td><td>Generic containers</td></tr>
+      <tr><td><code>h1–h6 p a img</code></td><td>Text &amp; media basics</td></tr>
+      <tr><td><code>ul ol li</code></td><td>Lists</td></tr>
+      <tr><td><code>form input label button</code></td><td>Forms</td></tr>
+      <tr><td><code>header nav main section footer</code></td><td>Semantic layout</td></tr>
+      <tr><td><code>class id src href alt</code></td><td>Most-used attributes</td></tr>
+    </tbody></table>
+
+    <table class="ref-table cram searchable" data-tags="quick reference css properties"><caption>Most-used CSS</caption><tbody>
+      <tr><td><code>color background</code></td><td>Basic paint</td></tr>
+      <tr><td><code>margin padding border</code></td><td>Box model</td></tr>
+      <tr><td><code>display flex grid</code></td><td>Layout mode</td></tr>
+      <tr><td><code>position top/left</code></td><td>Placement</td></tr>
+      <tr><td><code>font-size font-weight</code></td><td>Typography</td></tr>
+      <tr><td><code>width height gap</code></td><td>Sizing &amp; spacing</td></tr>
+    </tbody></table>
+
+    <table class="ref-table cram searchable" data-tags="quick reference javascript syntax"><caption>Most-used JS</caption><tbody>
+      <tr><td><code>let const function =&gt;</code></td><td>Core syntax</td></tr>
+      <tr><td><code>if for while</code></td><td>Control flow</td></tr>
+      <tr><td><code>map filter reduce</code></td><td>Array transforms</td></tr>
+      <tr><td><code>async await fetch</code></td><td>Async I/O</td></tr>
+      <tr><td><code>querySelector addEventListener</code></td><td>DOM + events</td></tr>
+    </tbody></table>
+
+    <table class="ref-table cram searchable" data-tags="quick reference dom apis"><caption>Most-used DOM APIs</caption><tbody>
+      <tr><td><code>getElementById / querySelector(All)</code></td><td>Find elements</td></tr>
+      <tr><td><code>createElement / append / remove</code></td><td>Build &amp; remove nodes</td></tr>
+      <tr><td><code>textContent / innerHTML</code></td><td>Read/write content</td></tr>
+      <tr><td><code>classList.add/remove/toggle</code></td><td>Style via classes</td></tr>
+      <tr><td><code>dataset</code></td><td>Read <code>data-*</code> attributes</td></tr>
+    </tbody></table>
+
+    <table class="ref-table cram searchable" data-tags="quick reference events"><caption>Most-used Events</caption><tbody>
+      <tr><td><code>click</code></td><td>Tap/click</td></tr>
+      <tr><td><code>input / change</code></td><td>Form value updates</td></tr>
+      <tr><td><code>submit</code></td><td>Form send</td></tr>
+      <tr><td><code>keydown</code></td><td>Keyboard</td></tr>
+      <tr><td><code>DOMContentLoaded</code></td><td>HTML fully parsed</td></tr>
+    </tbody></table>
+
+    <table class="ref-table cram searchable" data-tags="quick reference string methods"><caption>String methods</caption><tbody>
+      <tr><td><code>.length</code></td><td>Character count</td></tr>
+      <tr><td><code>.slice() .substring()</code></td><td>Extract part</td></tr>
+      <tr><td><code>.toUpperCase() .toLowerCase()</code></td><td>Case</td></tr>
+      <tr><td><code>.trim()</code></td><td>Remove edge spaces</td></tr>
+      <tr><td><code>.split() .replace() .includes()</code></td><td>Transform / search</td></tr>
+    </tbody></table>
+
+    <table class="ref-table cram searchable" data-tags="quick reference css units"><caption>CSS Units</caption><tbody>
+      <tr><td><code>px</code></td><td>Fixed pixels</td></tr>
+      <tr><td><code>%</code></td><td>Relative to parent</td></tr>
+      <tr><td><code>em / rem</code></td><td>Relative to parent / root font-size</td></tr>
+      <tr><td><code>vw / vh</code></td><td>Viewport percentage</td></tr>
+      <tr><td><code>clamp()</code></td><td>Fluid, bounded value</td></tr>
+    </tbody></table>
+
+    <table class="ref-table cram searchable" data-tags="quick reference flexbox"><caption>Flexbox</caption><tbody>
+      <tr><td><code>display:flex</code></td><td>Turn it on</td></tr>
+      <tr><td><code>justify-content</code></td><td>Main-axis align</td></tr>
+      <tr><td><code>align-items</code></td><td>Cross-axis align</td></tr>
+      <tr><td><code>gap</code></td><td>Space between items</td></tr>
+      <tr><td><code>flex: 1</code></td><td>Grow &amp; shrink equally</td></tr>
+    </tbody></table>
+
+    <table class="ref-table cram searchable" data-tags="quick reference css grid"><caption>Grid</caption><tbody>
+      <tr><td><code>display:grid</code></td><td>Turn it on</td></tr>
+      <tr><td><code>grid-template-columns</code></td><td>Define columns</td></tr>
+      <tr><td><code>repeat(auto-fit,minmax())</code></td><td>Responsive columns</td></tr>
+      <tr><td><code>gap</code></td><td>Row/column spacing</td></tr>
+      <tr><td><code>grid-column: span 2</code></td><td>Merge cells</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- ================ 6. COMMON MISTAKES =================== -->
+<!-- ======================================================= -->
+<section id="mistakes-section" class="subject" data-subject="Mistakes">
+  <div class="subject-tab subject-tab--warn">MISTAKES</div>
+  <h2 class="subject-title">Part 6 — Don't Make These Stupid Mistakes</h2>
+
+  <div class="mistake-list">
+    <div class="mistake-card searchable" data-tags="mistake closing tags">
+      <p class="wrong">✗ <code>&lt;p&gt;Hello</code></p>
+      <p class="correct">✓ <code>&lt;p&gt;Hello&lt;/p&gt;</code></p>
+      <p class="why-note">Unclosed tags let the browser guess where an element ends — layout breaks unpredictably.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake nesting">
+      <p class="wrong">✗ <code>&lt;p&gt;&lt;div&gt;x&lt;/div&gt;&lt;/p&gt;</code></p>
+      <p class="correct">✓ <code>&lt;div&gt;&lt;p&gt;x&lt;/p&gt;&lt;/div&gt;</code></p>
+      <p class="why-note">Block elements can't legally nest inside inline/paragraph elements.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake duplicate ids">
+      <p class="wrong">✗ Two elements with <code>id="box"</code></p>
+      <p class="correct">✓ One <code>id</code>, or use a shared <code>class</code></p>
+      <p class="why-note">IDs must be unique — <code>getElementById</code> and CSS <code>#id</code> only ever find the first one.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake equality">
+      <p class="wrong">✗ <code>if (x = 5)</code></p>
+      <p class="correct">✓ <code>if (x === 5)</code></p>
+      <p class="why-note">Single <code>=</code> assigns, it doesn't compare — a classic silent bug.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake return">
+      <p class="wrong">✗ <code>function add(a,b){ a+b; }</code></p>
+      <p class="correct">✓ <code>function add(a,b){ return a+b; }</code></p>
+      <p class="why-note">Without <code>return</code>, a function silently gives back <code>undefined</code>.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake array mutation">
+      <p class="wrong">✗ <code>const b = a; b.push(1);</code></p>
+      <p class="correct">✓ <code>const b = [...a]; b.push(1);</code></p>
+      <p class="why-note"><code>b = a</code> copies the reference, not the array — both variables point to the same data.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake specificity css">
+      <p class="wrong">✗ Fighting styles with more <code>!important</code></p>
+      <p class="correct">✓ Understand specificity, restructure selectors</p>
+      <p class="why-note">Stacking <code>!important</code> just moves the war one level up — it doesn't fix the cause.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake margin padding">
+      <p class="wrong">✗ Using margin to create inner space</p>
+      <p class="correct">✓ Padding = inside the border, margin = outside</p>
+      <p class="why-note">Confusing the two causes layout gaps that "should" be there and aren't (or vice versa).</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake flexbox alignment">
+      <p class="wrong">✗ Swapping <code>justify-content</code> and <code>align-items</code></p>
+      <p class="correct">✓ justify = main axis, align = cross axis</p>
+      <p class="why-note">They only look interchangeable in a row layout — switch to <code>column</code> and it's obvious they're not.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake box-sizing">
+      <p class="wrong">✗ Forgetting <code>box-sizing: border-box</code></p>
+      <p class="correct">✓ Set it globally: <code>* { box-sizing: border-box; }</code></p>
+      <p class="why-note">Without it, padding/border silently add to your declared width.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake innerhtml security">
+      <p class="wrong">✗ <code>el.innerHTML = userInput</code></p>
+      <p class="correct">✓ <code>el.textContent = userInput</code></p>
+      <p class="why-note">Untrusted HTML injected via <code>innerHTML</code> is a textbook XSS vulnerability.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake await">
+      <p class="wrong">✗ <code>const data = fetch(url).json();</code></p>
+      <p class="correct">✓ <code>const data = await (await fetch(url)).json();</code></p>
+      <p class="why-note">Skipping <code>await</code> gives you a pending Promise, not the resolved value.</p>
+    </div>
+    <div class="mistake-card searchable" data-tags="mistake event handling">
+      <p class="wrong">✗ Attaching a listener to every list item</p>
+      <p class="correct">✓ One delegated listener on the parent</p>
+      <p class="why-note">Per-item listeners don't work on items added later and don't scale — delegate instead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- ==================== 7. EXAM MODE ====================== -->
+<!-- ======================================================= -->
+<section id="exam-section" class="subject" data-subject="Exam Mode">
+  <div class="subject-tab subject-tab--exam">EXAM MODE</div>
+  <h2 class="subject-title">Part 7 — Exam Mode</h2>
+  <p class="section-intro">Flashcards to review, then a randomized rapid-fire quiz to test yourself.</p>
+
+  <div class="exam-tabs" role="tablist">
+    <button class="exam-tab active" data-mode="flash" role="tab" aria-selected="true">🗂 Flashcards</button>
+    <button class="exam-tab" data-mode="quiz" role="tab" aria-selected="false">⚡ Rapid-Fire Quiz</button>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="flashPanel" class="exam-panel">
+    <div id="flashcard" class="flashcard" tabindex="0" role="button" aria-label="Flip flashcard">
+      <div class="flashcard-inner">
+        <div class="flashcard-face flashcard-front"><span id="flashFront">Loading…</span></div>
+        <div class="flashcard-face flashcard-back"><span id="flashBack"></span></div>
+      </div>
+    </div>
+    <p class="flash-hint">Tap the card to flip it.</p>
+    <div class="exam-controls">
+      <button id="flashPrev" class="pen-btn">◀ Prev</button>
+      <span id="flashCount" class="flash-count">1 / 1</span>
+      <button id="flashShuffle" class="pen-btn">🔀 Shuffle</button>
+      <button id="flashNext" class="pen-btn">Next ▶</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quizPanel" class="exam-panel" hidden>
+    <div class="exam-scoreboard">
+      <span>Score: <strong id="quizScore">0</strong></span>
+      <span>Question <span id="quizNum">1</span> / <span id="quizTotal">1</span></span>
+      <button id="quizRestart" class="pen-btn">↺ Restart</button>
+    </div>
+    <div id="quizQuestionWrap" class="quiz-question-wrap">
+      <p id="quizType" class="quiz-type-badge"></p>
+      <p id="quizQuestion" class="quiz-question"></p>
+      <pre id="quizCode" class="quiz-code" hidden><code></code></pre>
+      <div id="quizOptions" class="quiz-options"></div>
+      <p id="quizFeedback" class="quiz-feedback" hidden></p>
+      <button id="quizNext" class="pen-btn quiz-next-btn" hidden>Next Question →</button>
+    </div>
+    <div id="quizResult" class="quiz-result" hidden>
+      <h3>Final Score: <span id="finalScore"></span></h3>
+      <p id="finalMessage"></p>
+      <button id="quizRestart2" class="pen-btn">Try Again</button>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- ================ 8. PRACTICE / PLAYGROUND ============= -->
+<!-- ======================================================= -->
+<section id="practice-section" class="subject" data-subject="Practice">
+  <div class="subject-tab subject-tab--practice">PRACTICE</div>
+  <h2 class="subject-title">Part 8 — Practice Playground</h2>
+  <p class="section-intro">Type HTML/CSS/JS on the left, see it run live on the right. 100% offline, nothing leaves your browser.</p>
+
+  <div class="playground">
+    <div class="pg-editors">
+      <label class="pg-label" for="pgHtml">HTML</label>
+      <textarea id="pgHtml" class="pg-textarea" spellcheck="false">&lt;h2&gt;Hello!&lt;/h2&gt;
+&lt;button id="btn"&gt;Click me&lt;/button&gt;</textarea>
+
+      <label class="pg-label" for="pgCss">CSS</label>
+      <textarea id="pgCss" class="pg-textarea" spellcheck="false">h2 { color: #1e4fa3; }
+button { padding: 8px 14px; }</textarea>
+
+      <label class="pg-label" for="pgJs">JavaScript</label>
+      <textarea id="pgJs" class="pg-textarea" spellcheck="false">document.getElementById("btn")
+  .addEventListener("click", () =&gt; alert("Hi!"));</textarea>
+
+      <button id="pgRun" class="pen-btn pg-run">▶ Run</button>
+    </div>
+    <div class="pg-preview-wrap">
+      <span class="pg-label">Live Preview</span>
+      <iframe id="pgPreview" class="pg-preview" title="Live code preview" sandbox="allow-scripts allow-modals"></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ BACK TO TOP ============ -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top" hidden>↑</button>
+
+<!-- ============ FOOTER ============ -->
+<footer class="notebook-footer">
+  <p>Made for the student who wants one notebook, not ten tabs. Print it, star it, keep it. ✎</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
